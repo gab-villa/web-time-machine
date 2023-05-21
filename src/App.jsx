@@ -11,7 +11,7 @@ import { format } from 'date-fns'
 
 function App() {
   //http://archive.org/wayback/available?url=example.com&timestamp=20060101
-  const LINK_TO_API = "http://archive.org/wayback/available?";
+  const LINK_TO_API = "https://archive.org/wayback/available?";
   const [status, setStatus] = useState('typing');
   const [website, setWebsite] = useState('');
   const [foundSite, setFoundSite] = useState('');

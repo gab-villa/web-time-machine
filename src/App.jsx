@@ -2,7 +2,7 @@ import Ratio from 'react-bootstrap/Ratio';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Dropdown from 'react-bootstrap/Dropdown';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -80,10 +80,11 @@ function App() {
                           aria-label="Ex: www.google.com"
                           aria-describedby="basic-addon2"
                         />
+                        
                       </Col  >
                       <Col
                         className="pt-3 pt-sm-3 pt-md-0 "
-                        xs={{span:6, order:2}}  
+                        xs={{span:7, order:2}}  
                         sm={{span:6, order:2}}
                         md={{span:3, order:2}}
                         lg={{span:3, order:2}}
@@ -98,10 +99,11 @@ function App() {
                             size="lg"
                             type="date" 
                           />
+                          
                       </Col>
                       <Col 
                         className="text-end pt-3 pt-sm-3 pt-md-0"
-                        xs={{span:6, order:3}}
+                        xs={{span:5, order:3}}
                         sm={{span:6, order:3}}
                         md={{span:2, order:3}}
                         lg={{span:2, order:2}}

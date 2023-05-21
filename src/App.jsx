@@ -35,7 +35,7 @@ function App() {
     setTimeout(async function(){
       const res = await fetch(LINK_TO_API + "url=" + website + "&timestamp=" + date);
       const data = await res.json();
-      console.log(data);
+  
       if(data.archived_snapshots.closest.available === true)
       {
         setFoundSite(data.archived_snapshots.closest.url);
@@ -49,7 +49,7 @@ function App() {
   }
   function handleInputDateChange(e)
   {
-    console.log(e.target.value);
+
     setInpDate(e.target.value);
   }
   return (

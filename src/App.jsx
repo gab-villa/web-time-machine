@@ -15,7 +15,7 @@ function App() {
   const [status, setStatus] = useState('typing');
   const [website, setWebsite] = useState('');
   const [foundSite, setFoundSite] = useState('');
-  const [inpDate, setInpDate] = useState('2010-03');
+  const [inpDate, setInpDate] = useState('1998-12');
 
   useEffect(() => {
       async function startWithRandSite()
@@ -182,7 +182,7 @@ function App() {
       
       <Row className="mx-0">
         <Col className="px-0">
-          <Ratio aspectRatio="21x9">
+          <Ratio aspectRatio="1x1">
           <iframe src={foundSite} title="timemachine"></iframe>
           </Ratio>
         </Col>

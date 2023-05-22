@@ -57,12 +57,10 @@ function App() {
   }, []);
   function parseStrToDate(input) {
     var parts = input.match(/(\d+)/g);
-    // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
     return new Date(parts[0], parts[1], parts[2]); // months are 0-based
   }
   function parseDateToISO(longDate)
   {
-    
     return longDate.toISOString().split('T')[0];
   }
   function handleSubmit(e)
@@ -133,7 +131,7 @@ function App() {
                       </Col>
                       <Col
                         className="pt-3 pt-sm-3 pt-md-0 "
-                        xs={{span:7, order:2}}  
+                        xs={{span:9, order:2}}  
                         sm={{span:6, order:2}}
                         md={{span:3, order:2}}
                         lg={{span:3, order:2}}
@@ -153,7 +151,7 @@ function App() {
                       </Col>
                       <Col 
                         className="text-end pt-3 pt-sm-3 pt-md-0"
-                        xs={{span:5, order:3}}
+                        xs={{span:3, order:3}}
                         sm={{span:6, order:3}}
                         md={{span:2, order:3}}
                         lg={{span:2, order:2}}
@@ -188,7 +186,6 @@ function App() {
         </Col>
       </Row>
     </Container>
-    //http://web.archive.org/web/20060101110226/http://www.facebook.com:80/
   );
 }
 

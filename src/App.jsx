@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -15,8 +15,46 @@ function App() {
   const [status, setStatus] = useState('typing');
   const [website, setWebsite] = useState('');
   const [foundSite, setFoundSite] = useState('');
-  const [inpDate, setInpDate] = useState('');
+  const [inpDate, setInpDate] = useState('2010-03');
 
+  useEffect(() => {
+      async function startWithRandSite()
+      {
+        setStatus('submitting');
+        const allOpc = [
+          {url:"spacejam.com",date:"20000300"},
+          {url:"hampsterdance.com",date:"20000300"},
+          {url:"ebay.com",date:"19990600"},
+          {url:"netscape.com",date:"20030300"},
+          {url:"pepsi.com",date:"19960700"},
+          {url:"lego.com",date:"19970100"},
+          {url:"mcdonalds.com/a_welcome",date:"19961100"},
+          {url:"apple.com",date:"19980500"},
+          {url:"google.com",date:"19981200"},
+          {url:"youtube.com",date:"20081200"},
+          {url:"thex-files.com",date:"19961000"},
+          {url:"cartoonnetwork.com",date:"19991000"},
+          {url:"meninblack.com",date:"19981000"},
+          {url:"zelda.com",date:"20050300"},
+          {url:"blockbuster.com",date:"19961200"},,
+          {url:"winamp.com",date:"20041100"},
+          {url:"info.cern.ch/hypertext/WWW/TheProject.html",date:"20130400"},
+          {url:"windows95.com",date:"19961200"},
+          {url:"ibm.com",date:"20001100"},
+          {url:"nintendo.com",date:"19961200"},
+        ];
+
+        const opc = allOpc[Math.floor(Math.random()*allOpc.length)];
+        const res = await fetch(LINK_TO_API + "url=" + opc.url + "&timestamp=" + opc.date);
+        const data = await res.json();
+        if(data.archived_snapshots.closest.available === true)
+        {
+          setFoundSite(data.archived_snapshots.closest.url);
+        }
+        setStatus('typing');
+      }
+      startWithRandSite();
+  }, []);
   function parseStrToDate(input) {
     var parts = input.match(/(\d+)/g);
     // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
@@ -24,14 +62,16 @@ function App() {
   }
   function parseDateToISO(longDate)
   {
+    
     return longDate.toISOString().split('T')[0];
   }
   function handleSubmit(e)
   {
     e.preventDefault();
     setStatus('submitting');
-    const date = inpDate.replace(/-/g, '');
     
+    const date = inpDate.replace('-', '') + "00";
+    console.log(date);
     setTimeout(async function(){
       const res = await fetch(LINK_TO_API + "url=" + website + "&timestamp=" + date);
       const data = await res.json();
@@ -39,6 +79,10 @@ function App() {
       if(data.archived_snapshots.closest.available === true)
       {
         setFoundSite(data.archived_snapshots.closest.url);
+      }
+      else
+      {
+        console.log("no se pudo encontrar un sitio en esa fecha!");
       }
       setStatus('typing');
     }, 4000);
@@ -49,7 +93,6 @@ function App() {
   }
   function handleInputDateChange(e)
   {
-
     setInpDate(e.target.value);
   }
   return (
@@ -79,9 +122,15 @@ function App() {
                           placeholder="Ex: www.google.com"
                           aria-label="Ex: www.google.com"
                           aria-describedby="basic-addon2"
+                          list="datalistOptions" 
                         />
-                        
-                      </Col  >
+                        <datalist id="datalistOptions">
+                          <option value="google.com"> Google </option>
+                          <option value="youtube.com"> Youtube </option>
+                          <option value="facebook.com"> Facebook</option>
+                          <option value="yahoo.com"> Yahoo </option>
+                        </datalist>
+                      </Col>
                       <Col
                         className="pt-3 pt-sm-3 pt-md-0 "
                         xs={{span:7, order:2}}  
@@ -97,7 +146,8 @@ function App() {
                             value={inpDate}
                             onChange={handleInputDateChange}
                             size="lg"
-                            type="date" 
+                            
+                            type="month" 
                           />
                           
                       </Col>
